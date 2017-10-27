@@ -1,0 +1,48 @@
+﻿<Window x:Class="testtask.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:testtask"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="525">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StudentStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition  />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" x:Name="StudentsList" SelectionMode="Multiple" AlternationCount="2" ItemsSource="{Binding Students}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock  FontSize="16">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{1} {0}">
+                                    <Binding Path="FirstName"></Binding>
+                                    <Binding Path="Last"></Binding>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Text="{Binding StringFormat={}{0} , Path=Age, Converter={StaticResource AgeConverter}}" FontSize="12" />
+                        <TextBlock Text="{Binding StringFormat={}{0} , Path=Gender, Converter={StaticResource GenderConverter}}" FontSize="12" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock Margin="4" FontStyle="Italic" FontSize="12" Text="List is empty" Style="{StaticResource listplaceholder}"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"  HorizontalAlignment="Center">
+            <Button Content="Добавить" Margin="10" Command="{Binding AddCommand}" />
+            <Button Content="Изменить" Margin="10" Command="{Binding EditCommand}" Style="{StaticResource buttondisable}"
+                    CommandParameter="{Binding ElementName=StudentsList, Path=SelectedItems}"/>
+            <Button Content="Удалить" Margin="10" Command="{Binding DeleteCommand}" Style="{StaticResource buttondisable}"
+                    CommandParameter="{Binding ElementName=StudentsList, Path=SelectedItems}" />
+        </StackPanel>
+    </Grid>
+</Window>
