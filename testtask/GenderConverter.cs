@@ -17,7 +17,7 @@ namespace testtask
             if (value.Equals(0))
                 return "мужчина";
             if (value.Equals(1))
-                return "женжина";
+                return "женщина";
             return value;
         }
 

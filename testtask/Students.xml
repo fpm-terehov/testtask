@@ -15,8 +15,8 @@
   <Student Id="2">
     <FirstName>Helen</FirstName>
     <Last>Wilson</Last>
-    <Age>21</Age>
-    <Gender>1</Gender>
+    <Age>16</Age>
+    <Gender>0</Gender>
   </Student>
   <Student Id="3">
     <FirstName>John</FirstName>
